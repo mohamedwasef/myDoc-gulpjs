@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> GulpJS Doc </title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+<ul class="menu">
+    <li>First Step</li>
+    <li>Second Step</li>
+    <li>Third Step</li>
+    <li>Fourth Step</li>
+    <li>Fifth Step</li>
+    <li>Sixth Step</li>
+    <li>Seventh Step</li>
+</ul>
+
+<div class="content">
+
+    <div class="column">
+        <h2>First Step</h2>
+        <ul>
+            <li>
+                Download Node JS (From <a href="http://nodejs.org" target="_blank">NodeJS</a> ) Then use NPM to start using GulpJS or use command line
+            </li>
+            <li>
+                Install Gulp Globaly in your system: 
+                <code class="command">sudo install -g gulp</code>
+            </li>
+            <li>
+                Install Gulp in your project, Map to the root directory using - cd to install it directly on your local project 
+                <code class="command">sudo npm install --save-dev gulp</code><br>
+                You will find node-modules folder installed on your project files
+            </li>
+            <li>
+                Make the first default task by creating a new folder inside on the root called <code>gulpfile.js</code><br>
+                <code>
+                    var gulp = require('gulp'); // require node package<br>
+                    gulp.task('default',function(){<br>
+                    console.log('Hello World'); // what will run here<br>
+                });
+                </code><br>
+                Run using <code class="command">gulp</code>
+            </li>
+        </ul>
+    </div>
+
+    <div class="column">
+        <h2>Second Step</h2>
+        <ul>
+            <li>
+                To minify the files Install <a href="https://www.npmjs.com/package/gulp-uglify" target="_blank">(Gulp Uglify)</a> from <a href="https://gulpjs.com/plugins/" target="_blank">plugins</a> use this command
+                <code class="command">sudo npm install --save-dev gulp-uglify</code><br>
+                It will install it's files inside node-module folder<br>
+                Define Uglify like the first step <br>
+                <code>
+                    var gulp = require('gulp'), // require gulp node package<br>
+                    var uglify = require('gulp-uglify'); // require uglify<br>
+                    gulp.task('default',function(){<br>
+                        gulp.src('js/*.js') // run command in particulur directory <br>
+                        .pipe(uglify())<br>
+                        .pipe(gulp.dest(minjs));<br>
+                    });
+                </code><br>
+                 Run using <code class="command">gulp</code>
+
+            </li>
+        </ul>
+    </div>
+
+    <div class="column">
+        <h2>Third Step</h2>
+        <ul>
+            <li>
+                Scripts Gulp use this command<br>
+                <code>
+                var gulp = require('gulp'), // require gulp node package<br>
+                var uglify = require('gulp-uglify'); // require uglify<br> <br>
+                    gulp.task('scripts',function(){<br>
+                        gulp.src('js/*.js') // run command in particulur directory <br>
+                        .pipe(uglify())<br>
+                        .pipe(gulp.dest(minjs));<br>
+                    });
+                </code><br>
+                 Run using <code>gulp scripts</code> to run scripts task only<br>
+                 Or use <code>gulp.task('default',['scripts']);</code> Callback function
+            </li>
+
+            <li>
+                To run Multiple Task - Add another Task<br>
+                <code>
+                    gulp.task('styles',function(){<br>
+                        console.log('Run Styles');<br>
+                    });
+                </code><br>
+                 Use <code>gulp.task('default',['scripts','styles']);</code> To make callback function to run multi task<br>
+                 Run using <code class="command">gulp</code> to run default function with callback<br>
+
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="column">
+        <h2>Fourth Step</h2>
+        <ul>
+            <li>
+                Watch Task - To watch JS Process<br>
+                <code>
+                    gulp.task('watch',function(){<br>
+                        gulp.watch('js/*.js',['scripts']); // Any js file<br>
+                    });
+                </code><br>
+                 Run <code class="command">gulp watch</code>
+                 <br>
+                 Use <code>gulp.task('default',['scripts','styles','watch']);</code> To make callback function to run multi task<br>
+
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="column">
+        <h2>Fifth Step</h2>
+        <ul>
+            <li>
+                Install & Compile SASS<br>
+                <code class="command">sudo npm install --save-dev gulp-ruby-sass</code><br>
+                Require SASS <br>
+                <code>var sass = require('gulp-ruby-sass'); // require sass</code> <br>
+                Add SASS Task<br>
+                <code>
+                    gulp.task('sass',function(){<br>
+                        gulp.src('scss/**/*.scss') //watch particular directory<br>
+                        .pipe(sass())<br>
+                        .pipe(gulp.dest('css/')) //save output in this folder<br>
+                    });
+                </code><br>
+                
+                 we can put some options like<br>
+                 <code>.pipe(sass({<br>
+                    style: 'compressed'<br>
+                 }))</code><br>
+                 Watch Task - To watch JS Process<br>
+                 <code>
+                    gulp.task('watch',function(){<br>
+                        gulp.watch('scss/**/*.scss',['sass']); // Any sass file<br>
+                    });
+                 </code><br>
+                 Run <code class="command">gulp sass</code><br>
+                  Use <code>gulp.task('default',['scripts','sass','watch']);</code> To make callback function to run multi task<br>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="column">
+        <h2>Sixth Step</h2>
+        <ul>
+            <li>
+                Plumber - It helps to show Issues in CMD<br>
+                <code class="command">sudo npm install --save-dev gulp-plumber</code><br>
+                Define SASS  <br>
+                <code>var plumber = require('gulp-plumber');</code> <br>
+                Edit any task<br>
+                <code>
+                    gulp.task('sass',function(){<br>
+                        gulp.src('scss/**/*.scss') //watch particular directory<br>
+                        .pipe(sass())<br>
+                        .pipe(plumber())<br>
+                        .pipe(gulp.dest('css/')) //save output in this folder<br>
+                    });
+                </code><br>
+                Make any typing mistake in sass file to check the problem report on CMD<br>
+                  Use <code>gulp.task('default',['scripts','sass','watch']);</code> To make callback function to run multi task<br>
+            </li>
+        </ul>
+    </div>
+
+    <div class="column">
+        <h2>Seventh Step</h2>
+        <ul>
+            <li>
+                Handling Errors without Plumber<br>
+                <code>
+                    gulp.task('sass',function(){<br>
+                        gulp.src('scss/**/*.scss') //watch particular directory<br>
+                        .pipe(sass())<br>
+                        .on('error',console.error.bind(console))<br>
+                        .pipe(gulp.dest('css/')) //save output in this folder<br>
+                    });
+                </code><br>
+                Or create a function for handling erorr<br>
+                  Use <code>.on('error', errorLog)</code><br>
+                  Then Add this function<br>
+                  <code>
+                      function errorLog(error){<br>
+                      console.error.bind(error);<br>
+                      this.emit('end');<br>
+                  }
+                  </code>
+            </li>
+        </ul>
+    </div>
+
+    <div class="column">
+        <h2>Eighth Step</h2>
+        <ul>
+            <li>
+                Live Reload- Install LiveReload Extention for browser (<a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en" target="_blank">Chrome ext.</a>)<br>
+                Then Install Gulp Package for LiveReload<br>
+                Define or Require Package<br>
+                <code>
+                livereload = require('gulp-livereload'), // require gulp livereload
+                </code><br>
+                Call the Livereload inside watch<br>
+                  Use <code>var server = livereload();</code><br>
+                  Inside SASS at the last add livereload in pipe after dest<br>
+                  <code>
+                    .pipe(livereload());
+                  </code>
+                  Then click the extention to start livereload with your webpage
+            </li>
+        </ul>
+    </div>
+
+    <div class="column">
+        <h2>Ninth Step</h2>
+        <ul>
+            <li>
+                Live Reload- Install LiveReload Extention for browser (<a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en" target="_blank">Chrome ext.</a>)<br>
+                Then Install Gulp Package for LiveReload<br>
+                Define or Require Package<br>
+                <code>
+                livereload = require('gulp-livereload'), // require gulp livereload
+                </code><br>
+                Call the Livereload inside watch<br>
+                  Use <code>var server = livereload();</code><br>
+                  Inside SASS at the last add livereload in pipe after dest<br>
+                  <code>
+                    .pipe(livereload());
+                  </code>
+                  Then click the extention to start livereload with your webpage
+            </li>
+        </ul>
+    </div>
+
+    <div class="column">
+        <h2>Teenth Step</h2>
+        <ul>
+            <li>
+                Image Compression- Install Image Compression<br>
+                <code class="command">
+                    sudo npm install --save-dev gulp-imagemin
+                </code><br>
+                Define and Require <br>
+                <code>
+                imagemin = require('gulp-imagemin'), // require gulp imagemin
+                </code><br>
+                Add Task to image compression<br>
+                <code>
+                    gulp.task('image',function(){<br>
+                        gulp.src('img/*') //watch particular directory<br>
+                        .pipe(imagemin())<br>
+                        .pipe(gulp.dest('build/img')) //save output in this folder<br>
+                    });
+                </code><br>
+                run using <br>
+                <code class="command">gulp image</code>
+            </li>
+        </ul>
+    </div>
+
+    <div class="column">
+        <h2>Eleventh Step</h2>
+        <ul>
+            <li>
+                Auto Browser Prefixing - Instillation<br>
+                <code class="command">
+                    sudo npm install gulp-autoprefixer
+                </code><br>
+                Define and Require <br>
+                <code>
+                prefix = require('gulp-autoprefixer'), // require gulp prefixer
+                </code><br>
+                Add Task to image compression<br>
+                <code>
+                    gulp.task('sass',function(){<br>
+                        gulp.src('scss/**/*.scss') //watch particular directory<br>
+                        .pipe(sass())<br>
+                        .on('error',console.error.bind(console))<br>
+                        <span class="mark">.pipe(prefix('last 2 versions'))</span><br>
+                        .pipe(gulp.dest('css/')) //save output in this folder<br>
+                    });
+                </code><br>
+                run using <br>
+                <code class="command">gulp sass</code>
+            </li>
+        </ul>
+    </div>
+    
+    
+
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
