@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title> GulpJS Doc </title>
-<link rel="stylesheet" href="css/style.css">
+    <title> GulpJS Doc </title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-
 <ul class="menu">
-    <li>First Step</li>
-    <li>Second Step</li>
-    <li>Third Step</li>
-    <li>Fourth Step</li>
-    <li>Fifth Step</li>
-    <li>Sixth Step</li>
-    <li>Seventh Step</li>
+    <li goto='s1'>First Step</li>
+    <li goto='s2'>Second Step</li>
+    <li goto='s3'>Third Step</li>
+    <li goto='s4'>Fourth Step</li>
+    <li goto='s5'>Fifth Step</li>
+    <li goto='s6'>Sixth Step</li>
+    <li goto='s7'>Seventh Step</li>
+    <li goto='s8'>Eighth Step</li>
+    <li goto='s9'>Nineth Step</li>
+    <li goto='s10'>Teenth Step</li>
 </ul>
 
 <div class="content">
 
-    <div class="column">
-        <h2>First Step</h2>
+    <div class="column" id="s1">
+        <h2>First Step - Installation</h2>
         <ul>
             <li>
                 Download Node JS (From <a href="http://nodejs.org" target="_blank">NodeJS</a> ) Then use NPM to start using GulpJS or use command line
@@ -47,8 +49,8 @@
         </ul>
     </div>
 
-    <div class="column">
-        <h2>Second Step</h2>
+    <div class="column" id="s2">
+        <h2>Second Step - minify</h2>
         <ul>
             <li>
                 To minify the files Install <a href="https://www.npmjs.com/package/gulp-uglify" target="_blank">(Gulp Uglify)</a> from <a href="https://gulpjs.com/plugins/" target="_blank">plugins</a> use this command
@@ -61,7 +63,7 @@
                     gulp.task('default',function(){<br>
                         gulp.src('js/*.js') // run command in particulur directory <br>
                         .pipe(uglify())<br>
-                        .pipe(gulp.dest(minjs));<br>
+                        .pipe(gulp.dest('minjs'));<br>
                     });
                 </code><br>
                  Run using <code class="command">gulp</code>
@@ -70,8 +72,8 @@
         </ul>
     </div>
 
-    <div class="column">
-        <h2>Third Step</h2>
+    <div class="column" id="s3">
+        <h2>Third Step - Minify</h2>
         <ul>
             <li>
                 Scripts Gulp use this command<br>
@@ -103,27 +105,8 @@
     </div>
 
 
-    <div class="column">
-        <h2>Fourth Step</h2>
-        <ul>
-            <li>
-                Watch Task - To watch JS Process<br>
-                <code>
-                    gulp.task('watch',function(){<br>
-                        gulp.watch('js/*.js',['scripts']); // Any js file<br>
-                    });
-                </code><br>
-                 Run <code class="command">gulp watch</code>
-                 <br>
-                 Use <code>gulp.task('default',['scripts','styles','watch']);</code> To make callback function to run multi task<br>
-
-            </li>
-        </ul>
-    </div>
-
-
-    <div class="column">
-        <h2>Fifth Step</h2>
+    <div class="column" id="s4">
+        <h2> Fourth Step - Watch</h2>
         <ul>
             <li>
                 Install & Compile SASS<br>
@@ -132,10 +115,11 @@
                 <code>var sass = require('gulp-ruby-sass'); // require sass</code> <br>
                 Add SASS Task<br>
                 <code>
-                    gulp.task('sass',function(){<br>
-                        gulp.src('scss/**/*.scss') //watch particular directory<br>
-                        .pipe(sass())<br>
-                        .pipe(gulp.dest('css/')) //save output in this folder<br>
+                    gulp.task('sass', function () {<br>
+                        return sass('scss/**/*.scss')<br>
+                            .on('error', function (err) { console.log(err.message); })<br>
+                            .pipe(gulp.dest('css/'))<br>
+                        });<br>
                     });
                 </code><br>
                 
@@ -155,14 +139,34 @@
         </ul>
     </div>
 
+    <div class="column" id="s5">
+        <h2>Fifth Step - Watch</h2>
+        <ul>
+            <li>
+                Watch Task - To watch JS Process<br>
+                <code>
+                    gulp.task('watch',function(){<br>
+                        gulp.watch('js/*.js',['scripts']); // Any js file<br>
+                    });
+                </code><br>
+                 Run <code class="command">gulp watch</code>
+                 <br>
+                 Use <code>gulp.task('default',['scripts','styles','watch']);</code> To make callback function to run multi task<br>
 
-    <div class="column">
-        <h2>Sixth Step</h2>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+    <div class="column"  id="s6">
+        <h2>Sixth Step - Plumber</h2>
         <ul>
             <li>
                 Plumber - It helps to show Issues in CMD<br>
                 <code class="command">sudo npm install --save-dev gulp-plumber</code><br>
-                Define SASS  <br>
+                Define Plumber  <br>
                 <code>var plumber = require('gulp-plumber');</code> <br>
                 Edit any task<br>
                 <code>
@@ -179,37 +183,38 @@
         </ul>
     </div>
 
-    <div class="column">
-        <h2>Seventh Step</h2>
+    <div class="column" id="s7">
+        <h2>Seventh Step - Gulp Connect</h2>
         <ul>
             <li>
-                Handling Errors without Plumber<br>
+                Live Reload- Install LiveReload Extention for browser<br>
+                Then Install gulp-connect<br>
+                <code class="command">npm install gulp-connect</code><br>
+                Define or Require Package<br>
                 <code>
-                    gulp.task('sass',function(){<br>
-                        gulp.src('scss/**/*.scss') //watch particular directory<br>
-                        .pipe(sass())<br>
-                        .on('error',console.error.bind(console))<br>
-                        .pipe(gulp.dest('css/')) //save output in this folder<br>
-                    });
+                connect = require('gulp-connect');
                 </code><br>
-                Or create a function for handling erorr<br>
-                  Use <code>.on('error', errorLog)</code><br>
-                  Then Add this function<br>
+                Write the connect inside sass<br>
+                  Add function after sass<br>
                   <code>
-                      function errorLog(error){<br>
-                      console.error.bind(error);<br>
-                      this.emit('end');<br>
-                  }
-                  </code>
+                    gulp.task('connect', function() { <br>
+                        connect.server({<br>
+                            livereload: true<br>
+                        });<br>
+                    });<br>
+                  </code><br>
+                  Write this to run the code <br>
+                  <code class="command">gulp.task('default', ['scripts','styles','watch','connect']);</code>
             </li>
         </ul>
     </div>
 
-    <div class="column">
-        <h2>Eighth Step</h2>
+    <div class="column" id="s8">
+        <h2>Eighth Step - LiveReload</h2>
         <ul>
             <li>
-                Live Reload- Install LiveReload Extention for browser (<a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en" target="_blank">Chrome ext.</a>)<br>
+                Gulp Connect<br>
+                <code class="command">sudo npm install --save-dev gulp-livereload</code><br>
                 Then Install Gulp Package for LiveReload<br>
                 Define or Require Package<br>
                 <code>
@@ -226,29 +231,8 @@
         </ul>
     </div>
 
-    <div class="column">
-        <h2>Ninth Step</h2>
-        <ul>
-            <li>
-                Live Reload- Install LiveReload Extention for browser (<a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en" target="_blank">Chrome ext.</a>)<br>
-                Then Install Gulp Package for LiveReload<br>
-                Define or Require Package<br>
-                <code>
-                livereload = require('gulp-livereload'), // require gulp livereload
-                </code><br>
-                Call the Livereload inside watch<br>
-                  Use <code>var server = livereload();</code><br>
-                  Inside SASS at the last add livereload in pipe after dest<br>
-                  <code>
-                    .pipe(livereload());
-                  </code>
-                  Then click the extention to start livereload with your webpage
-            </li>
-        </ul>
-    </div>
-
-    <div class="column">
-        <h2>Teenth Step</h2>
+    <div class="column" id="s9">
+        <h2>Nineth Step - IMG Compression</h2>
         <ul>
             <li>
                 Image Compression- Install Image Compression<br>
@@ -273,8 +257,8 @@
         </ul>
     </div>
 
-    <div class="column">
-        <h2>Eleventh Step</h2>
+    <div class="column" id="s10">
+        <h2>Teenth Step - Prefixing</h2>
         <ul>
             <li>
                 Auto Browser Prefixing - Instillation<br>
@@ -300,10 +284,9 @@
             </li>
         </ul>
     </div>
-    
-    
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
